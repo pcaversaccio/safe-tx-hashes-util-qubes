@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node_version }}
 
       - name: Run Prettier
-        run: npx prettier -c '**/*.{md,yml,yaml}' && npx prettier --write "**/*.sls" --parser yaml
+        run: npx prettier -c '**/*.{md,html,yml,yaml,sls}'
 
   codespell:
     runs-on: ${{ matrix.os }}
@@ -68,4 +68,4 @@ jobs:
         run: gem install awesome_bot
 
       - name: Validate URLs
-        run: awesome_bot ./*.md ./*.sh --allow-dupe --request-delay 0.4 --white-list https://opensea.io,https://linux.die.net/man/1/tput,https://etherscan.io,https://api.safe.global/tx-service
+        run: awesome_bot ./*.md ./*.sh --allow-dupe --request-delay 0.4

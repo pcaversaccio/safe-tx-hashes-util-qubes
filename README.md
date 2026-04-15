@@ -15,7 +15,7 @@ sudo qubesctl state.apply safe-tx-hashes-util
 
 ## What This Setup Provides
 
-- Creates a [minimal](https://doc.qubes-os.org/en/latest/user/templates/minimal-templates.html) [Fedora 43](https://www.qubes-os.org/news/2026/02/06/fedora-43-templates-available)-based template VM (`safe-tx-hashes-util-template`).
+- Creates a [minimal](https://doc.qubes-os.org/en/latest/user/templates/minimal-templates.html) [Fedora 43](https://www.qubes-os.org/news/2026/02/06/fedora-43-templates-available/)-based template VM (`safe-tx-hashes-util-template`).
 - Installs [Foundry](https://github.com/foundry-rs/foundry) from a verified pinned GitHub release (locally version-controlled).
 - Installs [`safe-tx-hashes-util`](https://github.com/pcaversaccio/safe-tx-hashes-util) into `/opt/safe-tx-hashes-util`.
 - Removes build-time dependencies after installation.
