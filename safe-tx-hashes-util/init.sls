@@ -2,8 +2,7 @@ include:
   - safe-tx-hashes-util.vm
 
 provision_template:
-  qvm.run:
-    - name: safe-tx-hashes-util-template
-    - cmd: qubesctl state.apply safe-tx-hashes-util.provision
+  cmd.run:
+    - name: qubesctl --skip-dom0 --targets=safe-tx-hashes-util-template state.apply safe-tx-hashes-util.provision
     - require:
         - qvm: safe-tx-hashes-util-template
