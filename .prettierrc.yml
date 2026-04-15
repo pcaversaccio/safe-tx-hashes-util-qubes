@@ -1,0 +1,4 @@
+overrides:
+  - files: "*.sls"
+    options:
+      parser: yaml
