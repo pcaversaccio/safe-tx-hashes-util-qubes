@@ -1,5 +1,6 @@
 cleanup_packages:
   cmd.run:
+    - shell: /bin/bash
     - name: |
         set -Eeuo pipefail
         echo "[Cleanup] Removing build dependencies..."

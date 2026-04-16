@@ -19,6 +19,7 @@ install_packages:
 # the trust anchor for system packages), but it records exactly what was installed.
 record_package_versions:
   cmd.run:
+    - shell: /bin/bash
     - name: |
         set -Eeuo pipefail
         LOG=/var/log/safe-tx-hashes-util-versions.log
@@ -29,6 +30,6 @@ record_package_versions:
             echo "bash    : $(bash --version | head -1)"
             echo "git     : $(git --version)"
         } | tee -a "$LOG"
-        echo "[Packages] Version log written to $LOG"
+        echo "[Packages] Version log written to ${LOG}."
     - require:
         - pkg: install_packages

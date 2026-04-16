@@ -1,5 +1,6 @@
 install_safe_tx_hashes_util:
   cmd.run:
+    - shell: /bin/bash
     - env:
         - http_proxy: http://127.0.0.1:8082
         - https_proxy: http://127.0.0.1:8082

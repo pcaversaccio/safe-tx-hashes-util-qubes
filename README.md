@@ -17,25 +17,26 @@ A [Qubes OS](https://www.qubes-os.org) [Salt](https://doc.qubes-os.org/en/latest
   - [Summary Table](#summary-table)
 - [Firefox (Optional)](#firefox-optional)
 
-## Installation (`dom0`)
+## Installation ([`dom0`](https://doc.qubes-os.org/en/latest/user/reference/glossary.html#term-dom0))
 
-Because the Qubes administrative domain (`dom0`) is offline by design, you must first download the repository in a network-connected AppVM (e.g., an AppVM named `dev`), and then securely transfer it to `dom0`.
+Because the [Qubes OS](https://www.qubes-os.org) administrative domain [`dom0`](https://doc.qubes-os.org/en/latest/user/reference/glossary.html#term-dom0) is offline by design, you must first download the repository in a network-connected [AppVM](https://doc.qubes-os.org/en/latest/user/reference/glossary.html#term-app-qube) (e.g., an [AppVM](https://doc.qubes-os.org/en/latest/user/reference/glossary.html#term-app-qube) named `dev`), and then securely transfer it to [`dom0`](https://doc.qubes-os.org/en/latest/user/reference/glossary.html#term-dom0).
 
-1. In your `dev` AppVM open a terminal and fetch the repository:
+1. In your `dev` [AppVM](https://doc.qubes-os.org/en/latest/user/reference/glossary.html#term-app-qube) open a terminal and fetch the repository:
 
 ```console
 ~$ git clone https://github.com/pcaversaccio/safe-tx-hashes-util-qubes.git
 ~$ tar -czf repo.tar.gz safe-tx-hashes-util-qubes
 ```
 
-2. In `dom0` open a terminal and securely pull the archive from your `dev` qube:
+2. In [`dom0`](https://doc.qubes-os.org/en/latest/user/reference/glossary.html#term-dom0) open a terminal and securely pull the archive from your `dev` qube:
 
 ```console
 # Pull the archive from the `dev` AppVM.
 ~$ qvm-run -p dev 'cat repo.tar.gz' > repo.tar.gz
 ~$ tar -xzf repo.tar.gz
 
-# IMPORTANT: Inspect the Salt files before proceeding, e.g.:
+# IMPORTANT: You must read every `.sls` file before applying them!
+# Inspect the Salt files before proceeding, e.g.:
 ~$ cat safe-tx-hashes-util-qubes/safe-tx-hashes-util/init.sls
 
 # Move the Salt states to the central Salt directory.
@@ -52,7 +53,7 @@ Because the Qubes administrative domain (`dom0`) is offline by design, you must 
 ~$ sudo rm -rf /srv/salt/safe-tx-hashes-util
 ```
 
-3. Eventually, clean up the `dev` AppVM:
+3. Eventually, clean up the `dev` [AppVM](https://doc.qubes-os.org/en/latest/user/reference/glossary.html#term-app-qube):
 
 ```console
 ~$ rm -rf repo.tar.gz safe-tx-hashes-util-qubes
@@ -61,8 +62,8 @@ Because the Qubes administrative domain (`dom0`) is offline by design, you must 
 ## What This Setup Provides
 
 - Creates a [minimal](https://doc.qubes-os.org/en/latest/user/templates/minimal-templates.html) [Fedora 43](https://www.qubes-os.org/news/2026/02/06/fedora-43-templates-available/)-based template VM (`safe-tx-hashes-util-template`).
-- Installs [Foundry](https://github.com/foundry-rs/foundry) from a verified pinned GitHub release (locally version-controlled).
-- Installs [`safe-tx-hashes-util`](https://github.com/pcaversaccio/safe-tx-hashes-util) into `/opt/safe-tx-hashes-util` at a pinned, verified commit.
+- Installs [Foundry](https://github.com/foundry-rs/foundry) from a _verified_ pinned GitHub release (locally version-controlled).
+- Installs [`safe-tx-hashes-util`](https://github.com/pcaversaccio/safe-tx-hashes-util) into `/opt/safe-tx-hashes-util` at a pinned, _verified_ commit.
 - Removes build-time dependencies after installation.
 - Optionally ships [Firefox](https://www.firefox.com) for GUI-based transaction inspection. For a _terminal-only_ setup, delete the `firefox` line in [`packages.sls`](./safe-tx-hashes-util/packages.sls) before provisioning.
 
@@ -85,7 +86,7 @@ You trust the [Salt](https://doc.qubes-os.org/en/latest/user/advanced-topics/sal
 
 Notable integrity controls already present in this config:
 
-- [Foundry](https://github.com/foundry-rs/foundry) is downloaded from a pinned GitHub release tag and its tarball is verified against a hardcoded SHA-256 before any binary is executed.
+- [Foundry](https://github.com/foundry-rs/foundry) is downloaded from a pinned GitHub release tag and its tarball is verified against a hardcoded SHA-256 hash before any binary is executed.
 - [`safe-tx-hashes-util`](https://github.com/pcaversaccio/safe-tx-hashes-util) is cloned and then checked out to a pinned commit SHA, which is re-verified after checkout.
 - Build dependencies (`git`) are removed after installation, shrinking the runtime attack surface.
 
@@ -105,4 +106,4 @@ You trust [`safe_hashes.sh`](https://github.com/pcaversaccio/safe-tx-hashes-util
 
 ## Firefox (Optional)
 
-The [`packages.sls`](./safe-tx-hashes-util/packages.sls) file includes `firefox` by default, but it is entirely _optional_. If you prefer a _terminal-only_ setup (for example, to further reduce the template's attack surface or because you verify transactions exclusively via the CLI) simply remove the `firefox` line from [`packages.sls`](./safe-tx-hashes-util/packages.sls) before running `qubesctl state.apply`.
+The [`packages.sls`](./safe-tx-hashes-util/packages.sls) file includes [`firefox`](https://www.firefox.com) by default, but it is entirely _optional_. If you prefer a _terminal-only_ setup (for example, to further reduce the template's attack surface or because you verify transactions exclusively via the CLI) simply remove the [`firefox`](https://www.firefox.com) line from [`packages.sls`](./safe-tx-hashes-util/packages.sls) before running `qubesctl state.apply`.
