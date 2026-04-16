@@ -28,10 +28,10 @@ install_foundry:
 
         trap 'rm -f "$TMP_FILE"; rm -rf "$SRC_DIR"' EXIT
 
-        echo "[Foundry] Version: \`$VERSION\`"
-        echo "[Foundry] URL    : $URL"
+        echo "[Foundry] Version: \`${VERSION}\`"
+        echo "[Foundry] URL    : ${URL}"
 
-        curl -fSL --retry 3 --connect-timeout 10 -o "$TMP_FILE" "$URL"
+        curl --proto "=https" -fL --retry 3 --connect-timeout 10 -o "$TMP_FILE" "$URL"
 
         echo "[Foundry] Verifying SHA256..."
         echo "${SHA256} ${TMP_FILE}" | sha256sum -c -
@@ -45,7 +45,7 @@ install_foundry:
 
         for bin in "${REQUIRED[@]}"; do
             [[ -x "$SRC_DIR/$bin" ]] || {
-                echo "[Foundry] ERROR: missing required binary \`$bin\`!" >&2
+                echo "[Foundry] ERROR: missing required binary \`${bin}\`!" >&2
                 exit 1
             }
         done
@@ -57,14 +57,13 @@ install_foundry:
             exit 1
         fi
 
-        echo "[Foundry] Commit: \`$COMMIT\`."
+        echo "[Foundry] Commit: \`${COMMIT}\`."
 
-        readonly INSTALL_DIR="/opt/foundry/$COMMIT"
-
+        readonly INSTALL_DIR="/opt/foundry/${COMMIT}"
         readonly CURRENT=$(readlink /opt/foundry/current 2>/dev/null || true)
 
         if [[ "$CURRENT" == "$INSTALL_DIR" ]]; then
-            echo "[Foundry] Already installed and active ✔"
+            echo "[Foundry] Already installed and active ✔."
             exit 0
         fi
 
@@ -73,7 +72,7 @@ install_foundry:
         for bin in "${REQUIRED[@]}"; do
             if [[ -f "$SRC_DIR/$bin" ]]; then
                 install -m 0755 "$SRC_DIR/$bin" "$INSTALL_DIR/"
-                echo "[Foundry] Installed $bin"
+                echo "[Foundry] Installed \`$bin\`."
             fi
         done
 
