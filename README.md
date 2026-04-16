@@ -6,7 +6,7 @@
 A [Qubes OS](https://www.qubes-os.org) [Salt](https://doc.qubes-os.org/en/latest/user/advanced-topics/salt.html) configuration for building a minimal, reproducible _template VM_ providing the [`safe-tx-hashes-util`](https://github.com/pcaversaccio/safe-tx-hashes-util) and [Foundry](https://github.com/foundry-rs/foundry) toolchain.
 
 > [!IMPORTANT]
-> This repository has been tested exclusively on Qubes OS [`4.3`](https://doc.qubes-os.org/en/latest/developer/releases/4_3/release-notes.html).
+> This repository has been tested exclusively on [Qubes OS](https://www.qubes-os.org) [`4.3`](https://doc.qubes-os.org/en/latest/developer/releases/4_3/release-notes.html).
 
 - [Installation (`dom0`)](#installation-dom0)
 - [What This Setup Provides](#what-this-setup-provides)
