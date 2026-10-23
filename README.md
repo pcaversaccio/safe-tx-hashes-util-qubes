@@ -11,7 +11,7 @@ A [Qubes OS](https://www.qubes-os.org) [Salt](https://doc.qubes-os.org/en/latest
 - [Installation (`dom0`)](#installation-dom0)
 - [What This Setup Provides](#what-this-setup-provides)
 - [Trust Assumptions](#trust-assumptions)
-  - [1. The `fedora-43-minimal` Template](#1-the-fedora-43-minimal-template)
+  - [1. The `fedora-44-minimal` Template](#1-the-fedora-44-minimal-template)
   - [2. This Salt Configuration](#2-this-salt-configuration)
   - [3. The `safe-tx-hashes-util` Script](#3-the-safe-tx-hashes-util-script)
   - [Summary Table](#summary-table)
@@ -61,7 +61,7 @@ Because the [Qubes OS](https://www.qubes-os.org) administrative domain [`dom0`](
 
 ## What This Setup Provides
 
-- Creates a [minimal](https://doc.qubes-os.org/en/latest/user/templates/minimal-templates.html) [Fedora 43](https://www.qubes-os.org/news/2026/02/06/fedora-43-templates-available/)-based template VM (`safe-tx-hashes-util-template`).
+- Creates a [minimal](https://doc.qubes-os.org/en/latest/user/templates/minimal-templates.html) [Fedora 44](https://www.qubes-os.org/news/2026/07/23/fedora-44-templates-available/)-based template VM (`safe-tx-hashes-util-template`).
 - Installs [Foundry](https://github.com/foundry-rs/foundry) from a _verified_ pinned GitHub release (locally version-controlled).
 - Installs [`safe-tx-hashes-util`](https://github.com/pcaversaccio/safe-tx-hashes-util) into `/opt/safe-tx-hashes-util` at a pinned, _verified_ commit.
 - Removes build-time dependencies after installation.
@@ -71,12 +71,12 @@ Because the [Qubes OS](https://www.qubes-os.org) administrative domain [`dom0`](
 
 This setup does **not** eliminate trust - it makes the trust surface _explicit_ and _minimal_. When you use this environment to verify Safe multisig transaction hashes, you are trusting the following:
 
-### 1. The [`fedora-43-minimal`](https://www.qubes-os.org/news/2026/02/06/fedora-43-templates-available/) Template
+### 1. The [`fedora-44-minimal`](https://www.qubes-os.org/news/2026/07/23/fedora-44-templates-available/) Template
 
 All system packages (`bash`, `coreutils`, `curl`, `jq`, `ca-certificates`, etc.) are installed via [`dnf`](https://github.com/rpm-software-management/dnf) from [Fedora](https://fedoraproject.org)'s signed repositories. This means you trust:
 
 - The [Fedora](https://fedoraproject.org) project's package signing keys and their key-management practices.
-- The integrity of the [Qubes OS](https://www.qubes-os.org) [`fedora-43-minimal`](https://www.qubes-os.org/news/2026/02/06/fedora-43-templates-available/) template as shipped by the [Qubes OS](https://www.qubes-os.org) project.
+- The integrity of the [Qubes OS](https://www.qubes-os.org) [`fedora-44-minimal`](https://www.qubes-os.org/news/2026/07/23/fedora-44-templates-available/) template as shipped by the [Qubes OS](https://www.qubes-os.org) project.
 
 [Fedora](https://fedoraproject.org)'s package signatures are verified automatically by [`dnf`](https://github.com/rpm-software-management/dnf). No additional pinning of system packages is applied, because the [Fedora](https://fedoraproject.org)-signed repository is already the trust anchor for these artifacts (the same trust anchor that [Qubes OS](https://www.qubes-os.org) itself relies on). After provisioning, the installed versions of key tools are recorded to `/var/log/safe-tx-hashes-util-versions.log` inside the template for auditability.
 
@@ -98,7 +98,7 @@ You trust [`safe_hashes.sh`](https://github.com/pcaversaccio/safe-tx-hashes-util
 
 | Component                           | Trust Anchor                  | Integrity Control                         |
 | ----------------------------------- | ----------------------------- | ----------------------------------------- |
-| Fedora 43 minimal template          | Qubes OS project              | Qubes OS template verification            |
+| Fedora 44 minimal template          | Qubes OS project              | Qubes OS template verification            |
 | System packages (`jq`, `curl`, ...) | Fedora project GPG keys       | `dnf` GPG signature check                 |
 | Foundry binaries                    | This repo's hardcoded SHA-256 | `sha256sum -c` before extraction          |
 | `safe-tx-hashes-util` script        | This repo's pinned commit SHA | `git checkout` + `rev-parse` verification |
