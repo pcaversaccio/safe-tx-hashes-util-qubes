@@ -8,9 +8,9 @@ install_foundry:
         set -Eeuo pipefail
 
         declare -A HASHES
-        HASHES["v1.8.6"]="58850106984038f3a7200f38a4182c8cb423d3a4f4c7848eacbc2453e6bc35fc" # See https://github.com/foundry-rs/foundry/releases/tag/v1.8.6.
+        HASHES["v1.8.7"]="ba470eb718e779e4b0e3f1520b5284231b1bf98e9a39de07fb8f77ed70525bcf" # See https://github.com/foundry-rs/foundry/releases/tag/v1.8.7.
 
-        readonly VERSION="v1.8.6"
+        readonly VERSION="v1.8.7"
         echo "[Foundry] Installing Foundry version \`${VERSION}\`..."
 
         mkdir -p /opt/foundry
