@@ -8,7 +8,7 @@ install_safe_tx_hashes_util:
     - name: |
         set -Eeuo pipefail
 
-        readonly PINNED_COMMIT="80857b75cc977d25205168efbe63d44718326db8" # See https://github.com/pcaversaccio/safe-tx-hashes-util/commits/main.
+        readonly PINNED_COMMIT="9b011487965c8f826b4fd54805e072bdb47fbad7" # See https://github.com/pcaversaccio/safe-tx-hashes-util/commits/main.
         readonly REPO_URL="https://github.com/pcaversaccio/safe-tx-hashes-util"
 
         echo "[safe-tx-hashes-util] Cloning repository..."
